@@ -15,11 +15,11 @@ if (require.main === module) {
 
 		program
 			.option('-h, --hash <value>', 'Transaction hash (include 0x prefix)')
-			.option('-n, --network [value]', 'Network to use', 'mainnet')
+			.option('-p, --providerUrl [value]', 'URL of the provider to use (or set WEB3_PROVIDER env var)', 'http://localhost:8545')
 			.option('-a, --`abiContract` [value]', 'Alternative contract that would have the ABI')
 			.parse(process.argv);
 
-		const { hash, network } = program;
+		const { hash, providerUrl } = program;
 		console.log(gray('txn:', `https://etherscan.io/tx/${hash}`));
 
 		const {
@@ -35,7 +35,7 @@ if (require.main === module) {
 			value,
 		} = await lookup({
 			hash,
-			network,
+			providerUrl,
 		});
 
 		console.log(gray('from:', from));
